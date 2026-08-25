@@ -23,6 +23,7 @@
               elmPackages.elm-format
               elmPackages.elm-language-server
               elmPackages.elm-live
+              gnumake
               typescript-go
               vscode-langservers-extracted
             ];
