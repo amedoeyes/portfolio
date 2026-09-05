@@ -7,7 +7,7 @@ import Commands exposing (Command)
 import Dict exposing (Dict)
 import FS
 import Html exposing (Html, main_)
-import Html.Events exposing (onInput, preventDefaultOn)
+import Html.Events exposing (onClick, onInput, preventDefaultOn)
 import IO
 import Json.Decode as Decode
 import RichText exposing (RichText)
@@ -62,11 +62,11 @@ data =
         RichText.Group
             [ RichText.Line (RichText.Plain "Hi, I'm Ahmed, a software developer interested in programming language theory, functional programming, systems programming, and graphics programming. I like computers, music and cats.")
             , RichText.Line (RichText.Plain "")
-            , RichText.Line (RichText.Plain "I'm currently studying programming language theory and making https://github.com/amedoeyes/void-lang a statically typed functional language inspired by Haskell and Rust.")
+            , RichText.Line (RichText.Plain "I'm currently studying programming language theory and making https://git.eyoun.net/ahmed/void-lang a statically typed functional language inspired by Haskell and Rust.")
             , RichText.Line (RichText.Plain "")
-            , RichText.Line (RichText.Plain "I used to work on my own game engine https://github.com/amedoeyes/void-engine but I dropped it after exploring Rust and Bevy. The reason is that Bevy is everything I want in a game engine, and I realized that contributing to an established game engine is a better use of my time than rewriting my own engine from scratch for the 5th time (yes it was gonna be the 5th lmao).")
+            , RichText.Line (RichText.Plain "I used to work on my own game engine https://git.eyoun.net/ahmed/void-engine but I dropped it after exploring Rust and Bevy. The reason is that Bevy is everything I want in a game engine, and I realized that contributing to an established game engine is a better use of my time than rewriting my own engine from scratch for the 5th time (yes it was gonna be the 5th lmao).")
             , RichText.Line (RichText.Plain "")
-            , RichText.Line (RichText.Plain "My setup is NixOS and Helix. You can check my dotfiles at https://github.com/amedoeyes/dotfiles")
+            , RichText.Line (RichText.Plain "My setup is NixOS and Helix. You can check my dotfiles at https://git.eyoun.net/ahmed/nixos-config")
             , RichText.Line (RichText.Plain "")
             , RichText.Line (RichText.Plain "Regarding music, I mostly listen to Maidcore, Shoegaze, and Progressive Metal. My favorite artists are Yakui The Maid, abriction, and Polyphia. I also practice guitar when I'm not programming.")
             , RichText.Line (RichText.Plain "")
@@ -74,44 +74,44 @@ data =
             ]
     , contact =
         RichText.Group
-            [ RichText.Line (RichText.Plain "Email: amedoeyes@gmail.com")
+            [ RichText.Line (RichText.Plain "Email: ahmed@eyoun.net")
             , RichText.Line (RichText.Plain "Discord: @amedoeyes")
-            , RichText.Line (RichText.Plain "Github: https://github.com/amedoeyes ")
+            , RichText.Line (RichText.Plain "Git: https://git.eyoun.net/ahmed")
             ]
     , projects =
         [ { name = RichText.Plain "void-lang"
           , description = RichText.Plain "Statically typed, lazily-evaluated functional programming language with Hindley-Milner type inference. Inspired by Haskell and Rust."
-          , repository = RichText.Plain "https://github.com/amedoeyes/void-lang"
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/void-lang"
           , language = RichText.Plain "Rust"
           }
         , { name = RichText.Plain "mason"
           , description = RichText.Plain "Command-line tool to manage external development tools like LSP servers, debuggers, linters, and formatters."
-          , repository = RichText.Plain "https://github.com/amedoeyes/mason"
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/mason"
           , language = RichText.Plain "Go"
           }
         , { name = RichText.Plain "mprisctl"
           , description = RichText.Plain "Command-line tool to interact with MPRIS compatible media players."
-          , repository = RichText.Plain "https://github.com/amedoeyes/mprisctl"
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/mprisctl"
           , language = RichText.Plain "Rust"
           }
         , { name = RichText.Plain "void-engine"
           , description = RichText.Plain "Cross platform C++23 game engine."
-          , repository = RichText.Plain "https://github.com/amedoeyes/void-engine"
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/void-engine"
           , language = RichText.Plain "C++"
           }
         , { name = RichText.Plain "cli"
           , description = RichText.Plain "Simple modern C++23 command-line interface library."
-          , repository = RichText.Plain "https://github.com/amedoeyes/cli"
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/cli"
           , language = RichText.Plain "C++"
           }
         , { name = RichText.Plain "lexer"
           , description = RichText.Plain "Modular modern C++23 lexer library."
-          , repository = RichText.Plain "https://github.com/amedoeyes/lexer"
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/lexer"
           , language = RichText.Plain "C++"
           }
-        , { name = RichText.Plain "portofolio"
-          , description = RichText.Plain "This protofolio."
-          , repository = RichText.Plain "https://github.com/amedoeyes/amedoeyes.github.io"
+        , { name = RichText.Plain "portfolio"
+          , description = RichText.Plain "This terminal based portfolio."
+          , repository = RichText.Plain "https://git.eyoun.net/ahmed/portfolio"
           , language = RichText.Plain "Elm"
           }
         ]
@@ -241,7 +241,7 @@ scrollToBottom =
 
 view : Model -> Html Msg
 view model =
-    main_ []
+    main_ [ onClick FocusInput ]
         [ IO.viewOutput model
         , IO.viewInput prompt
             (onInput UpdateInput)
