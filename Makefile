@@ -6,18 +6,15 @@ OUTPUT = $(DIST)/script.js
 
 .PHONY: build release watch clean
 
-$(DIST): public/
+$(DIST):
 	mkdir -p $@
 	cp -r public/. $@/
 
-$(OUTPUT): $(MAIN) | $(DIST)
-	elm make $(MAIN) --output $(OUTPUT) $(ELM_FLAGS)
+build: | $(DIST)
+	elm make $(MAIN) --output $(OUTPUT) --debug
 
-build: ELM_FLAGS = --debug
-build: $(OUTPUT) $(DIST)
-
-release: ELM_FLAGS = --optimize
-release: $(OUTPUT) $(DIST)
+release: | $(DIST)
+	elm make $(MAIN) --output $(OUTPUT) --optimize
 
 watch: build
 	elm-live $(MAIN) --dir=$(DIST) --open -- --output=$(OUTPUT) --debug
